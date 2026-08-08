@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DragGestureView: View {
     @State private var isDragging = false
-    @State private var offset: CGSize = .zero
+    @State private var offset: CGPoint = CGPoint(x: 300, y: 100)
     
     
     var drag: some Gesture {
         DragGesture()
             .onChanged { _ in self.isDragging = true }
             .onChanged { value in
-                offset = value.translation
+                offset = value.location
                 print(offset)
             }
             .onEnded { _ in self.isDragging = false }
@@ -36,7 +36,7 @@ struct DragGestureView: View {
                 .scaledToFit()
                 .scaledToFill()
                 .font(.system(size:-100))
-                .offset(offset)
+                .position(offset)
                 .gesture(drag)
             
             
