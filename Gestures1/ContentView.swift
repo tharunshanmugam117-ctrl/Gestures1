@@ -15,15 +15,15 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                NavigationLink {
-                    SimultaneousGestureView()
-                } label: {
-                    Text("Go to simultaneous gesture view")
-                }
-            }
-            .navigationTitle("Tap Gesture")
+//        NavigationStack {
+//            VStack {
+//                NavigationLink {
+//                    SimultaneousGestureView()
+//                } label: {
+//                    Text("Go to simultaneous gesture view")
+//                }
+//            }
+//            .navigationTitle("Tap Gesture")
             
             
             Circle()
@@ -32,7 +32,7 @@ struct ContentView: View {
                 .gesture(tap)
         }
     }
-}
+
 
 #Preview {
     ContentView()

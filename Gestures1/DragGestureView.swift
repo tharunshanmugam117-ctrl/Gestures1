@@ -7,9 +7,19 @@
 
 import SwiftUI
 
+enum Route: Hashable {
+    case longPress
+    case simultaneous
+}
+
 struct DragGestureView: View {
     @State private var isDragging = false
-    @State private var offset: CGPoint = CGPoint(x: 300, y: 100)
+    @State private var offset: CGPoint = CGPoint(x: 156, y: 355)
+    @State private var path = NavigationPath()
+    
+    var isInTargetZone: Bool {
+        offset.x > 276 && offset.y > 149 && offset.y < 367
+    }
     
     
     var drag: some Gesture {
@@ -24,26 +34,49 @@ struct DragGestureView: View {
     
     
     var body: some View {
-        HStack{
-            Text("DRAG THE DUCK TO THE LEMONADE STAND")
-                .font(.largeTitle)
-        }
-        ZStack{
-            Image(.lemonadeStand2)
+        NavigationStack(path: $path) {
+            VStack {
+                HStack{
+                    Text("DRAG THE DUCK TO THE LEMONADE STAND")
+                        .font(.largeTitle)
+                }
+                ZStack{
+                    Image(.lemonadeStand2)
+                    
+                    
+                    Image(.duck3)
+                        .scaledToFit()
+                        .scaledToFill()
+                        .font(.system(size:-100))
+                        .position(offset)
+                        .gesture(drag)
+                    
+                    
+                }
                 
-
-            Image(.duck3)
-                .scaledToFit()
-                .scaledToFill()
-                .font(.system(size:-100))
-                .position(offset)
-                .gesture(drag)
-            
-            
+                if isInTargetZone {
+                    Text("You made it!")
+                        .bold()
+                        .font(.largeTitle)
+                        .padding()
+                    Button("Buy the drink!!") {
+                        path.append(Route.longPress)
+                    }
+                    .padding()
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .clipShape(.capsule)
+                }
+            }
+            .navigationDestination(for: Route.self) { route in
+                switch route {
+                case .longPress: LongpressView(path: $path)
+                case .simultaneous: SimultaneousGestureView()
+                }
+            }
         }
     }
 }
-
 #Preview {
     DragGestureView()
 }
