@@ -18,12 +18,12 @@ struct LongpressView: View {
     
     var body: some View {
         VStack{
-            Text("Oh no you need to complete a task first ")
+            Text("Your lemonade is almost done!")
                 .bold()
                 .font(.largeTitle)
-            Text("Hold the bar!")
-                .bold()
-                .font(.largeTitle)
+//            Text("Fill the bar to get your lemonade")
+//                .bold()
+//                .font(.largeTitle)
             
             Text("Hold for lemonade!")
                 .font(.system(size: 20, weight: .heavy, design: .rounded))
@@ -51,7 +51,7 @@ struct LongpressView: View {
                             touchDown = false
                         }
                     })
-                )
+                    )
                 .simultaneousGesture(
                     LongPressGesture(minimumDuration: 2, maximumDistance: .infinity)
                         .onEnded({ _ in
@@ -73,6 +73,7 @@ struct LongpressView: View {
                         .background(.blue)
                         .foregroundStyle(.white)
                         .clipShape(.capsule)
+                        
                     }
                 }
         }
