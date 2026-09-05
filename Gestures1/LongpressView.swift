@@ -8,8 +8,6 @@
 import SwiftUI
 
 // Source - https://stackoverflow.com/a/77639424
-// Posted by Sweeper
-// Retrieved 2026-08-01, License - CC BY-SA 4.0
 
 struct LongpressView: View {
     @Binding var path: NavigationPath
